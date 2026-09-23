@@ -1,0 +1,14 @@
+# Build output
+build/
+miluphcuda
+*.o
+*.d
+
+# Editor/OS junk
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Simulation run output (particles, logs, etc.)
+*.log

@@ -243,6 +243,11 @@
 #define BOUNDARY_PARTICLE_ID -1
 #define GHOST_BOUNDARIES 0
 
+// sfair - flags to switch the manual gravity/floor additions in boundary.cu (BoundaryConditionsAfterRHS)
+// on and off, so runs with/without them can be compared without editing boundary.cu itself
+#define SFAIR_GRAVITY_Z 1  // 1 = apply constant gravity acceleration in -z, 0 = no manual gravity
+#define SFAIR_FLOOR 1      // 1 = freeze particles that reach z<=0 (floor), 0 = no floor
+
 // IO options
 #define HDF5IO 1    // use HDF5 (needs libhdf5-dev and libhdf5)
 #define MORE_OUTPUT 1   //produce additional output to HDF5 files: p_max, p_min, rho_max, rho_min

@@ -248,7 +248,7 @@ __global__ void BoundaryConditionsAfterRHS(int *interactions)
         }
 
 // adding central star with one solar mass
-// at (0,0)            
+// at (0,0)
 
 #if 0
         distance = 0.0;
@@ -259,21 +259,14 @@ __global__ void BoundaryConditionsAfterRHS(int *interactions)
         p.ay[i] -= 1.327474512e+20 * p.y[i] / distance;
 #endif
 
-        // feel the Earth!
-#if 0
-        if (p.y[i] < 0.0) {
-            p.vy[i] = 0.0;
-            p.ay[i] = 0.0;
-        } else {
-            p.ay[i] -= 9.81;
-        }
+#if SFAIR_GRAVITY_Z
+        // sfair - adding gravity in z direction pointing downward
+        p.az[i] -= 9.81;
 #endif
 
-        // do not fall below y = 0.0
-
-        /* let's stick to the ground */
-#if 0
-        if (p.z[i] <= 1e-3) {
+#if SFAIR_FLOOR
+        // sfair - creating the floor at z=0: particles at or below it get stuck
+        if (p.z[i] <= 0.0) {
             p.ax[i] = 0;
             p.ay[i] = 0;
             p.dxdt[i] = 0;

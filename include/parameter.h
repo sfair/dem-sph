@@ -184,8 +184,8 @@
 
 // Porosity models:
 // p-alpha model implemented following Jutzi (200x); if in doubt activate both of the following options
-#define PALPHA_POROSITY 1         // pressure depends on distention
-#define STRESS_PALPHA_POROSITY 1  // deviatoric stress is also affected by distention
+#define PALPHA_POROSITY 0         // pressure depends on distention
+#define STRESS_PALPHA_POROSITY 0  // deviatoric stress is also affected by distention
 // The factor f (Jutzi et al. 2008, eq. 44) relates the velocity divergence of the matrix to that
 // of the porous material. Jutzi applies it to the whole of Hooke's law, including the Jaumann
 // rotation terms (his eqs. 45/48). Set to 0 to apply f only to the volumetric part, which leaves
@@ -209,12 +209,12 @@
 //   or
 //   INTEGRATE_SML if you want to additionally integrate an ODE for the sml, following the ansatz by Benz:
 //                 d sml / dt  = sml/DIM * 1/rho  \nabla velocity
-#define VARIABLE_SML 1
+#define VARIABLE_SML 0
 #define FIXED_NOI 0
-#define INTEGRATE_SML 1
+#define INTEGRATE_SML 0
 // read sml for each particle from input file (instead of using a single, material-specific one from material.cfg)
 // (if VARIABLE_SML is not set the individual smls remain constant)
-#define READ_INITIAL_SML_FROM_PARTICLE_FILE 1
+#define READ_INITIAL_SML_FROM_PARTICLE_FILE 0
 
 // correction terms for sml calculation (warning: experimental)
 // adds gradient of the smoothing length to continuity equation, equation of motion, energy equation

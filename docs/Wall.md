@@ -47,9 +47,12 @@ Em `BoundaryConditionsAfterRHS`, depois da gravidade e do chão, para `matId == 
         rho_0 = <densidade inicial das partículas da parede>
         rho_limit = 1.0
         shear_modulus = 0.0
+        yield_stress = 3.5e9
     };
 }
 ```
+
+Exemplo pronto em `run/wall.cfg`.
 
 - Murnaghan: pressão só depende da densidade, sem os problemas do Tillotson.
 - `rho_0` igual à densidade inicial: pressão zero no início.
@@ -57,6 +60,8 @@ Em `BoundaryConditionsAfterRHS`, depois da gravidade e do chão, para `matId == 
 - `n = 7`: endurece rápido quando a areia entra, sem aumentar o som em repouso.
 - `shear_modulus = 0`: o passo de tempo usa `cs² + 4/3 G/ρ` de todas as partículas, inclusive
   as travadas (`rk2adaptive.cu:534`).
+- `yield_stress > 0`: a parede não usa, mas o `COLLINS_PLASTICITY_SIMPLE` divide por
+  `yield_stress - cohesion` (`plasticity.cu:326`); com os dois zero dá NaN.
 
 ## 5. Arquivo de entrada
 

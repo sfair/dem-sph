@@ -269,14 +269,37 @@ __global__ void BoundaryConditionsAfterRHS(int *interactions)
         if (p.z[i] <= 0.0) {
             p.ax[i] = 0;
             p.ay[i] = 0;
-            p.dxdt[i] = 0;
-            p.dydt[i] = 0;
+            p.az[i] = 0;
             p.vx[i] = 0;
             p.vy[i] = 0;
-#if DIM == 3
-            p.az[i] = 0;
-            p.dzdt[i] = 0;
             p.vz[i] = 0;
+            p.dxdt[i] = 0;
+            p.dydt[i] = 0;
+            p.dzdt[i] = 0;
+        }
+#endif
+
+#if SFAIR_WALLS
+        // sfair - wall particles do not move and carry no deviatoric stress (this also undoes the gravity above);
+        // drhodt is kept, so sand pushing on the wall raises its density and pressure
+        if (matId == SFAIR_WALL_MATID) {
+            p.ax[i] = 0;
+            p.ay[i] = 0;
+            p.az[i] = 0;
+            p.vx[i] = 0;
+            p.vy[i] = 0;
+            p.vz[i] = 0;
+            p.dxdt[i] = 0;
+            p.dydt[i] = 0;
+            p.dzdt[i] = 0;
+#if SOLID
+            for (d = 0; d < DIM*DIM; d++) {
+                p.S[i*DIM*DIM + d] = 0;
+                p.dSdt[i*DIM*DIM + d] = 0;
+            }
+#endif
+#if INTEGRATE_ENERGY
+            p.dedt[i] = 0;
 #endif
         }
 #endif

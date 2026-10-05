@@ -12,6 +12,7 @@ run the code, plus pre/post-processing utilities, is included.
 * `Makefile`, `configure.sh` — build
 * `material-config/` — material config file format (`CREATE-MATERIAL-CONFIG.md`) and a library of material parameters
 * `pc_values.dat` — runtime lookup table read by `io.cu`
+* `initial_conditions/` — scripts that create and plot the boundary particles: `wall/` (open-top box)
 * `utils/preprocessing/`, `utils/postprocessing/` — scripts for generating initial conditions and analyzing output
 
 ## Owners

@@ -246,11 +246,11 @@
 // sfair - flags to switch the manual gravity/floor additions in boundary.cu (BoundaryConditionsAfterRHS)
 // on and off, so runs with/without them can be compared without editing boundary.cu itself
 #define SFAIR_GRAVITY_Z 1  // 1 = apply constant gravity acceleration in -z, 0 = no manual gravity
-#define SFAIR_FLOOR 1      // 1 = freeze particles that reach z<=0 (floor), 0 = no floor
+#define SFAIR_FLOOR 0      // 1 = freeze particles that reach z<=0 (floor), 0 = no floor
 // sfair - box walls/floor made of particles of material SFAIR_WALL_MATID in the input file;
 // they are kept fixed but their density (and so their pressure) still evolves, which pushes the sand back
 #define SFAIR_WALLS 1      // 1 = freeze particles of material SFAIR_WALL_MATID, 0 = treat them as normal particles
-#define SFAIR_WALL_MATID 1 // material ID of the wall particles (must exist in material.cfg)
+#define SFAIR_WALL_MATID 2 // material ID of the wall particles (must exist in material.cfg)
 
 // IO options
 #define HDF5IO 1    // use HDF5 (needs libhdf5-dev and libhdf5)

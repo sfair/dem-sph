@@ -109,13 +109,6 @@
 // please check the first lines of kernel.cu to choose the approach for linear consistency if your simulation outcomes look strange (USE_OLDSCHOOL_KERNEL_GRADIENT_CORRECTION_SCHEME is the default and should provide the best results, though)
 #define TENSORIAL_CORRECTION 1
 
-// Apply the tensorial correction also to the velocity gradient in the continuity equation.
-// Set to 0 to use the raw kernel gradient for drhodt while keeping the correction in the
-// momentum equation and in dSdt.
-// Has no effect unless TENSORIAL_CORRECTION is 1.
-#define TENSORIAL_CORRECTION_FOR_DRHODT 0
-
-
 
 // Available plastic flow conditions:
 // (if you do not know what this is, choose (1) or nothing)
@@ -139,7 +132,7 @@
 //          yield strength = pressure + cohesion (i.e., slope = 1)
 //       -> you can additionally use (1) to set an upper limit for the yield stress
 //       -> negative-pressure cap: negative pressures are limited to zero of yield strength curve (at -cohesion)
-#define MOHR_COULOMB_PLASTICITY 1
+#define MOHR_COULOMB_PLASTICITY 0
 
 //   (4) Pressure dependent yield strength following Collins et al. (2004) and the implementation in Jutzi (2015)
 //       -> yield strength is different for damaged (Y_d) and intact material (Y_i), and averaged mean (Y) in between:
@@ -242,15 +235,6 @@
 // note: see additionally boundaries.cu with functions beforeRHS and afterRHS for boundary conditions
 #define BOUNDARY_PARTICLE_ID -1
 #define GHOST_BOUNDARIES 0
-
-// sfair - flags to switch the manual gravity/floor additions in boundary.cu (BoundaryConditionsAfterRHS)
-// on and off, so runs with/without them can be compared without editing boundary.cu itself
-#define SFAIR_GRAVITY_Z 1  // 1 = apply constant gravity acceleration in -z, 0 = no manual gravity
-#define SFAIR_FLOOR 1      // 1 = freeze particles that reach z<=0 (floor), 0 = no floor
-// sfair - box walls/floor made of particles of material SFAIR_WALL_MATID in the input file;
-// they are kept fixed but their density (and so their pressure) still evolves, which pushes the sand back
-#define SFAIR_WALLS 1      // 1 = freeze particles of material SFAIR_WALL_MATID, 0 = treat them as normal particles
-#define SFAIR_WALL_MATID 1 // material ID of the wall particles (must exist in material.cfg)
 
 // IO options
 #define HDF5IO 1    // use HDF5 (needs libhdf5-dev and libhdf5)
